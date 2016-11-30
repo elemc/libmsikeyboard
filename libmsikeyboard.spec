@@ -8,6 +8,7 @@ URL:            http://elemc.name
 Source0:        http://repo.elemc.name/sources/%{name}-%{version}.tar.xz
 
 BuildRequires:  hidapi-devel
+BuildRequires:  cmake
 
 %description
 Library for change LED color, intensity and modes on MSI keyboards
