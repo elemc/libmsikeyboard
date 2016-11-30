@@ -1,6 +1,7 @@
 #include <hidapi/hidapi.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "msikeyboard.h"
 
 #define MSI_KEYBOARD_VENDOR_ID 0x1770
@@ -16,11 +17,11 @@ void close_device(hid_device *device) {
     hid_close(device);
 }
 
-int init_msi_keyboard() {
+int init_msi_keyboard(void) {
     return hid_init();
 }
 
-int free_msi_keyboard() {
+int free_msi_keyboard(void) {
     return hid_exit();
 }
 
@@ -49,6 +50,7 @@ int set_color(unsigned char region, unsigned char color, unsigned char intensity
     if ( result < 0 ) {
         return result;
     }
+    free(data);
 
     return 0;
 }
@@ -82,6 +84,7 @@ int set_rgb_color(unsigned char region, unsigned char r, unsigned char g, unsign
     if ( result < 0 ) {
         return result;
     }
+    free(data);
 
     return 0;
 }
@@ -109,6 +112,7 @@ int set_mode(unsigned char mode) {
     if ( result < 0 ) {
         return result;
     }
+    free(data);
 
     return 0;
 }

@@ -1,8 +1,12 @@
 #ifndef MSIKEYBOARD_H__
 #define MSIKEYBOARD_H__
 
-int init_msi_keyboard();
-int free_msi_keyboard();
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+int init_msi_keyboard(void);
+int free_msi_keyboard(void);
 
 int set_color(unsigned char region, unsigned char color, unsigned char intensity);
 int set_color_by_names(const char *region, const char *color, const char *intensity);
@@ -15,5 +19,10 @@ unsigned char get_mode(const char *mode_name);
 unsigned char get_region(const char *region_name);
 unsigned char get_color(const char *color_name);
 unsigned char get_intensity(const char *name);
+
+#ifdef __cplusplus
+}
+#endif
+
 
 #endif

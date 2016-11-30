@@ -39,6 +39,7 @@ set(MSIKEYBOARD_VERSION_MINOR 1)
 set(MSIKEYBOARD_VERSION_PATCH 0)
 set(MSIKEYBOARD_VERSION_STRING ${MSIKEYBOARD_VERSION_MAJOR}.${MSIKEYBOARD_VERSION_MINOR}.${MSIKEYBOARD_VERSION_PATCH})
 
+
 set (HEADERS
     msikeyboard.h
 )
@@ -46,11 +47,11 @@ set (SOURCES
     msikeyboard.c
 )
 
+project (${PROJECT_NAME})
+
 set (HIDAPI_hidraw_DIR ${CMAKE_SOURCE_DIR}/cmake-modules)
 set (HIDAPI_libusb_DIR ${CMAKE_SOURCE_DIR}/cmake-modules)
-message( ${HIDAPI_libusb_DIR} )
 
-project (${PROJECT_NAME})
 
 set (DEP_LIB_INCLUDES           "")
 set (BUILD_PROJECT_LIBRARIES    "")
@@ -62,6 +63,14 @@ ELSE ( WITH_HIDRAW )
 ENDIF ( WITH_HIDRAW )
 set (BUILD_PROJECT_LIBRARIES ${BUILD_PROJECT_LIBRARIES} ${HIDAPI_LIBRARIES})
 set (DEP_LIB_INCLUDES ${DEP_LIB_INCLUDES} ${HIDAPI_INCLUDE_DIR})
+
+include(FindPkgConfig QUIET)
+if(PKG_CONFIG_FOUND)
+    configure_file (
+        "${PROJECT_SOURCE_DIR}/msikeyboard.pc.in"
+        "${PROJECT_BINARY_DIR}/msikeyboard.pc"
+    )
+endif(PKG_CONFIG_FOUND)
 
 include_directories (${CMAKE_CURRENT_BINARY_DIR} ${DEP_LIB_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -88,3 +97,6 @@ if ( NOT APPLE )
             ARCHIVE DESTINATION ${LIB_INSTALL_DIR}/static)
     install(FILES ${HEADERS} DESTINATION ${INCLUDE_INSTALL_DIR}/${PROJECT_NAME})
 endif ( NOT APPLE )
+if(PKG_CONFIG_FOUND)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/msikeyboard.pc DESTINATION ${LIB_INSTALL_DIR}/pkgconfig)
+endif(PKG_CONFIG_FOUND)
