@@ -69,6 +69,7 @@ if(PKG_CONFIG_FOUND)
     configure_file (
         "${PROJECT_SOURCE_DIR}/msikeyboard.pc.in"
         "${PROJECT_BINARY_DIR}/msikeyboard.pc"
+        @ONLY
     )
 endif(PKG_CONFIG_FOUND)
 
