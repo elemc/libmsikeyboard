@@ -3,7 +3,7 @@ exec_prefix=@CMAKE_INSTALL_PREFIX@
 libdir=@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@
 includedir=@CMAKE_INSTALL_PREFIX@/@INCLUDE_INSTALL_DIR@
 
-Name: ${PROJECT_NAME}
+Name: msikeyboard
 Description: C Library for change color, modes, intensity on MSI keyboards
 Version: @MSIKEYBOARD_VERSION_STRING@
 Libs: -L${libdir} -lmsikeyboard
