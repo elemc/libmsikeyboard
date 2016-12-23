@@ -1,6 +1,6 @@
 Name:           libmsikeyboard
-Version:        0.1.0
-Release:        3%{?dist}
+Version:        0.2.0
+Release:        1%{?dist}
 Summary:        Library for change LED color, intensity and mode on MSI keyboards
 
 License:        GPLv3
@@ -41,6 +41,8 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 %postun -p /sbin/ldconfig
 
+%check
+ctest -V %{?_smp_mflags}
 
 %files
 %license LICENSE
@@ -55,6 +57,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Fri Dec 23 2016 Alexei Panov <me AT elemc DOT name> 0.2.0-1
+- New release
+
 * Thu Dec 01 2016 Alexei Panov <me AT elemc DOT name> 0.1.0-3
 - Change name in pc file
 

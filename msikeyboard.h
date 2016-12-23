@@ -20,10 +20,10 @@ unsigned char get_region(const char *region_name);
 unsigned char get_color(const char *color_name);
 unsigned char get_intensity(const char *name);
 
-char **get_intensities(void);
-char **get_colors(void);
-char **get_modes(void);
-char **get_regions(void);
+char **get_intensities(size_t *size);
+char **get_colors(size_t *size);
+char **get_modes(size_t *size);
+char **get_regions(size_t *size);
 
 #ifdef __cplusplus
 }

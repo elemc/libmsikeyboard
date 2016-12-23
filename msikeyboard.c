@@ -122,21 +122,34 @@ int set_mode_by_name(const char *mode) {
     return set_mode(num_mode);
 }
 
+unsigned char get_code_from_list(const char *name, char **list, size_t list_size) {
+    if ( list == NULL ) {
+        return -2;
+    }
+
+    unsigned char result = -1;
+
+    for (int i=0; i < list_size; i++) {
+        if ( strcmp(list[i], name) == 0 ) {
+            result = i;
+            break;
+        }
+    }
+    free(list);
+
+    return result;
+}
+
 unsigned char get_mode(const char *mode_name) {
     if (mode_name == NULL) {
         return -1;
     }
 
-    if ( strcmp(mode_name, "gaming") == 0 )
-        return 2;
-    else if ( strcmp(mode_name, "breathe") == 0 )
-        return 3;
-    else if ( strcmp(mode_name, "demo") == 0 )
-        return 4;
-    else if ( strcmp(mode_name, "wave") == 0 )
-        return 5;
-
-    return 1;
+    size_t size;
+    char **modes = get_modes(&size);
+    unsigned char result = get_code_from_list(mode_name, modes, size);
+    result = result < 0 ? 1 : result;
+    return result;
 }
 
 unsigned char get_region(const char *region_name) {
@@ -144,22 +157,11 @@ unsigned char get_region(const char *region_name) {
         return -1;
     }
 
-    if ( strcmp(region_name, "left") == 0 )
-        return 1;
-    else if ( strcmp(region_name, "middle") == 0 )
-        return 2;
-    else if ( strcmp(region_name, "right") == 0 )
-        return 3;
-    else if ( strcmp(region_name, "logo") == 0 )
-        return 4;
-    else if ( strcmp(region_name, "front_left") == 0 )
-        return 5;
-    else if ( strcmp(region_name, "front_right") == 0 )
-        return 6;
-    else if ( strcmp(region_name, "touchpad") == 0 )
-        return 7;
+    size_t size;
+    char **regions = get_modes(&size);
+    unsigned char result = get_code_from_list(region_name, regions, size);
 
-    return -1;
+    return result;
 }
 
 unsigned char get_color(const char *color_name) {
@@ -167,26 +169,11 @@ unsigned char get_color(const char *color_name) {
         return -1;
     }
 
-    if ( strcmp(color_name, "off") == 0 )
-        return 0;
-    else if ( strcmp(color_name, "red") == 0 )
-        return 1;
-    else if ( strcmp(color_name, "orange") == 0 )
-        return 2;
-    else if ( strcmp(color_name, "yellow") == 0 )
-        return 3;
-    else if ( strcmp(color_name, "green") == 0 )
-        return 4;
-    else if ( strcmp(color_name, "sky") == 0 )
-        return 5;
-    else if ( strcmp(color_name, "blue") == 0 )
-        return 6;
-    else if ( strcmp(color_name, "purple") == 0 )
-        return 7;
-    else if ( strcmp(color_name, "white") == 0 )
-        return 8;
-
-    return 0;
+    size_t size;
+    char **colors = get_colors(&size);
+    unsigned char result = get_code_from_list(color_name, colors, size);
+    result = result < 0 ? 1 : result;
+    return result;
 }
 
 unsigned char get_intensity(const char *name) {
@@ -194,31 +181,29 @@ unsigned char get_intensity(const char *name) {
         return -1;
     }
 
-    if ( strcmp(name, "high") == 0 )
-        return 0;
-    else if ( strcmp(name, "medium") == 0 )
-        return 1;
-    else if ( strcmp(name, "low") == 0 )
-        return 2;
-    else if ( strcmp(name, "light") == 0 )
-        return 3;
-
-    return 0;
+    size_t size;
+    char **intensities = get_intensities(&size);
+    unsigned char result = get_code_from_list(name, intensities, size);
+    result = result < 0 ? 1 : result;
+    return result;
 }
 
-char **get_intensities(void) {
+char **get_intensities(size_t *size) {
+    *size = 4;
     char **result;
-    result = calloc(sizeof(char*), 4);
+    result = calloc(sizeof(char*), *size);
     result[0] = "high";
     result[1] = "medium";
     result[2] = "low";
     result[3] = "light";
+
     return result;
 }
 
-char **get_colors(void) {
+char **get_colors(size_t *size) {
+    *size = 9;
     char **result;
-    result = calloc(sizeof(char*), 9);
+    result = calloc(sizeof(char*), *size);
     result[0] = "off";
     result[1] = "red";
     result[2] = "orange";
@@ -232,9 +217,10 @@ char **get_colors(void) {
     return result;
 }
 
-char **get_modes(void) {
+char **get_modes(size_t *size) {
+    *size = 6;
     char **result;
-    result = calloc(sizeof(char*), 6);
+    result = calloc(sizeof(char*), *size);
     result[0] = "off";
     result[1] = "normal";
     result[2] = "gaming";
@@ -244,9 +230,10 @@ char **get_modes(void) {
     return result;
 }
 
-char **get_regions(void) {
+char **get_regions(size_t *size) {
+    *size = 7;
     char **result;
-    result = calloc(sizeof(char*), 7);
+    result = calloc(sizeof(char*), *size);
     result[0] = "left";
     result[1] = "middle";
     result[2] = "right";
