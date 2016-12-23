@@ -42,7 +42,7 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 %postun -p /sbin/ldconfig
 
 %check
-ctest -V %{?_smp_mflags}
+LD_LIBRARY_PATH=. ctest -V %{?_smp_mflags}
 
 %files
 %license LICENSE

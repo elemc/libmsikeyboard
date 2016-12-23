@@ -128,8 +128,8 @@ unsigned char get_code_from_list(const char *name, char **list, size_t list_size
     }
 
     unsigned char result = -1;
-
-    for (int i=0; i < list_size; i++) {
+    int i;
+    for (i=0; i < list_size; i++) {
         if ( strcmp(list[i], name) == 0 ) {
             result = i;
             break;
