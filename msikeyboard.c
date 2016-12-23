@@ -205,3 +205,55 @@ unsigned char get_intensity(const char *name) {
 
     return 0;
 }
+
+char **get_intensities(void) {
+    char **result;
+    result = calloc(sizeof(char*), 4);
+    result[0] = "high";
+    result[1] = "medium";
+    result[2] = "low";
+    result[3] = "light";
+    return result;
+}
+
+char **get_colors(void) {
+    char **result;
+    result = calloc(sizeof(char*), 9);
+    result[0] = "off";
+    result[1] = "red";
+    result[2] = "orange";
+    result[3] = "yellow";
+    result[4] = "green";
+    result[5] = "sky";
+    result[6] = "blue";
+    result[7] = "purple";
+    result[8] = "white";
+
+    return result;
+}
+
+char **get_modes(void) {
+    char **result;
+    result = calloc(sizeof(char*), 6);
+    result[0] = "off";
+    result[1] = "normal";
+    result[2] = "gaming";
+    result[3] = "breathe";
+    result[4] = "demo";
+    result[5] = "wave";
+    return result;
+}
+
+char **get_regions(void) {
+    char **result;
+    result = calloc(sizeof(char*), 7);
+    result[0] = "left";
+    result[1] = "middle";
+    result[2] = "right";
+    result[3] = "logo";
+    result[4] = "front_left";
+    result[5] = "front_right";
+    result[6] = "touchpad";
+    return result;
+
+}

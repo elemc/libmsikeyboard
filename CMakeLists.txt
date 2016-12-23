@@ -91,6 +91,12 @@ if ( APPLE )
     set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS ${NEW_COMPILE_FLAGS})
 endif ( APPLE )
 
+# Tests section
+add_executable(test-msikeyboard test-msikeyboard.c)
+target_link_libraries( test-msikeyboard ${PROJECT_NAME} )
+
+add_test( NAME "Main" COMMAND test-msikeyboard )
+
 # Install section
 if ( NOT APPLE )
     install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}
