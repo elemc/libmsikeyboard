@@ -9,7 +9,8 @@ void printResult(char *what, char **result, int resultSize) {
     }
 
     printf("%s:\n", what);
-    for( int i=0; i < resultSize; i++ ) {
+    int i;
+    for( i=0; i < resultSize; i++ ) {
         printf("\t\"%s\" ok.\n", result[i]);
     }
 }

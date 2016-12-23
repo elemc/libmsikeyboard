@@ -1,6 +1,6 @@
 Name:           libmsikeyboard
 Version:        0.2.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Library for change LED color, intensity and mode on MSI keyboards
 
 License:        GPLv3
@@ -57,6 +57,9 @@ LD_LIBRARY_PATH=. ctest -V %{?_smp_mflags}
 
 
 %changelog
+* Fri Dec 23 2016 Alexei Panov <me AT elemc DOT name> 0.2.0-2
+- Fix C99 bug for EL7
+
 * Fri Dec 23 2016 Alexei Panov <me AT elemc DOT name> 0.2.0-1
 - New release
 
