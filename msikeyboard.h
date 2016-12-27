@@ -5,6 +5,8 @@
 extern "C" {
 #endif
 
+#include<unistd.h>
+
 int init_msi_keyboard(void);
 int free_msi_keyboard(void);
 
