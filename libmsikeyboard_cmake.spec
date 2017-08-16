@@ -1,5 +1,5 @@
 Name:           libmsikeyboard
-Version:        0.2.2
+Version:        0.2.1
 Release:        1%{?dist}
 Summary:        Library for change LED color, intensity and mode on MSI keyboards
 
@@ -8,8 +8,7 @@ URL:            http://elemc.name
 Source0:        http://repo.elemc.name/sources/%{name}-%{version}.tar.xz
 
 BuildRequires:  hidapi-devel
-BuildRequires:  meson
-BuildRequires:  gcc
+BuildRequires:  cmake
 
 %description
 Library for change LED color, intensity and modes on MSI keyboards
@@ -26,13 +25,16 @@ developing applications that use %{name}.
 %prep
 %autosetup
 
+
 %build
-%meson
-%meson_build
+%cmake -DCMAKE_BUILD_TYPE=Release .
+%make_build
+
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%meson_install
+%make_install
+find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %post -p /sbin/ldconfig
@@ -40,7 +42,7 @@ rm -rf $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 
 %check
-%meson_test
+LD_LIBRARY_PATH=. ctest -V %{?_smp_mflags}
 
 %files
 %license LICENSE
@@ -55,9 +57,6 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-* Wed Aug 16 2017 Alexei Panov <me AT elemc DOT name> 0.2.2-1
-- New release
-
 * Tue Dec 27 2016 Alexei Panov <me AT elemc DOT name> 0.2.1-1
 - Fix missing size_t bug
 
