@@ -1,8 +1,13 @@
 project('libmsikeyboard', 'c')
-hiddep = dependency('hidapi-libusb')
+if ['darwin'].contains(host_machine.system())
+    hiddep = dependency('hidapi')
+elif 
+    hiddep = dependency('hidapi-libusb')
+endif
+
 mainlib = shared_library('msikeyboard', 'msikeyboard.c', version: '0.2.2', dependencies: hiddep, install: true)
 
-install_headers('msikeyboard.h', subdir: 'libmsikeyboard')
+install_headers('msikeyboard.h', subdir: 'msikeyboard')
 
 e = executable('test-msikeyboard', 'test-msikeyboard.c', link_with: mainlib)
 test('Test MSI keyboard LED', e)
