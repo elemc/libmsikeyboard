@@ -1,7 +1,7 @@
 #!/bin/sh
 
 PROJECT_NAME=libmsikeyboard
-VERSION=0.2.2
+VERSION=0.2.3
 PKGNAME=${PROJECT_NAME}-${VERSION}
 
 pushd ..
