@@ -1,11 +1,10 @@
 project('libmsikeyboard', 'c')
 
-# error('is_cross_build: @0@'.format(meson.is_cross_build()))
-hiddep = dependency('hidapi-libusb')
-if meson.is_cross_build()
-    if host_machine.system() == 'darwin'
-        hiddep = dependency('hidapi')
-    endif
+#hiddep = dependency('hidapi-libusb')
+if ['darwin'].contains(build_machine.system())
+    hiddep = dependency('hidapi')
+elif
+    hiddep = dependency('hidapi-libusb')
 endif
 
 mainlib = shared_library('msikeyboard', 'msikeyboard.c', version: '0.2.2', dependencies: hiddep, install: true)
