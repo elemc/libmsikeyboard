@@ -5,7 +5,7 @@ hiddep = ''
 if ['darwin'].contains(build_machine.system())
     hiddep = 'hidapi'
 elif
-    hiddep = 'hidapi-libusb'/hiddep
+    hiddep = 'hidapi-libusb'
 endif
 
 mainlib = shared_library('msikeyboard', 'msikeyboard.c', version: '0.2.2', dependencies: dependency(hiddep), install: true)
