@@ -1,13 +1,14 @@
 project('libmsikeyboard', 'c')
 
 #hiddep = dependency('hidapi-libusb')
+hiddep = ''
 if ['darwin'].contains(build_machine.system())
-    hiddep = dependency('hidapi')
+    hiddep = 'hidapi'
 elif
-    hiddep = dependency('hidapi-libusb')
+    hiddep = 'hidapi-libusb'/hiddep
 endif
 
-mainlib = shared_library('msikeyboard', 'msikeyboard.c', version: '0.2.2', dependencies: hiddep, install: true)
+mainlib = shared_library('msikeyboard', 'msikeyboard.c', version: '0.2.2', dependencies: dependency(hiddep), install: true)
 
 install_headers('msikeyboard.h', subdir: 'msikeyboard')
 
