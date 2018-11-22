@@ -1,10 +1,18 @@
-project('libmsikeyboard', 'c')
+project('libmsikeyboard', 
+        'c',
+        'cpp',
+        version : '0.2.2',
+        meson_version : '>= 0.47.0',
+        default_options : [
+            'warning_level=1',
+            'c_std=gnu89'
+        ]
+)
 
-#hiddep = dependency('hidapi-libusb')
 hiddep = ''
 if ['darwin'].contains(build_machine.system())
     hiddep = 'hidapi'
-elif
+else
     hiddep = 'hidapi-libusb'
 endif
 
