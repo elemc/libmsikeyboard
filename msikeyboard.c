@@ -162,7 +162,7 @@ unsigned char get_region(const char *region_name) {
     }
 
     size_t size;
-    char **regions = get_modes(&size);
+    char **regions = get_regions(&size);
     unsigned char result = get_code_from_list(region_name, regions, size);
 
     return result;
@@ -262,16 +262,17 @@ char **get_modes(size_t *size) {
 }
 
 char **get_regions(size_t *size) {
-    *size = 7;
+    *size = 8;
     char **result;
     result = calloc(sizeof(char*), *size);
-    result[0] = "left";
-    result[1] = "middle";
-    result[2] = "right";
-    result[3] = "logo";
-    result[4] = "front_left";
-    result[5] = "front_right";
-    result[6] = "touchpad";
+    result[0] = "none";
+    result[1] = "left";
+    result[2] = "middle";
+    result[3] = "right";
+    result[4] = "logo";
+    result[5] = "front_left";
+    result[6] = "front_right";
+    result[7] = "touchpad";
     return result;
 
 }

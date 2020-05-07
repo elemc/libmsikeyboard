@@ -29,6 +29,21 @@ int main(int argc, char const *argv[]) {
     char **regionList = get_regions(&size);
     printResult("Modes", regionList, size);
 
+    int result = set_color_by_names("left", "white", "high");
+    if ( result != 0 ) {
+        printf("Unable to set colors\n");
+        return 1;
+    }
+    struct RGB rgb;
+    rgb.r = 255;
+    rgb.g = 255;
+    rgb.b = 255;
+    result = set_rgb_color_by_name("left", rgb, "high");
+    if ( result != 0 ) {
+        printf("Unable to set RGB colors\n");
+        return 1;
+    }
+
     free(intList);
     free(colorList);
     free(modeList);

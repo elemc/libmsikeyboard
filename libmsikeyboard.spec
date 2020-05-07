@@ -1,5 +1,5 @@
 Name:           libmsikeyboard
-Version:        0.2.3
+Version:        0.3.1
 Release:        1%{?dist}
 Summary:        Library for change LED color, intensity and mode on MSI keyboards
 
@@ -55,6 +55,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue May 07 2020 Alexei Panov <me AT elemc DOT name> 0.3.1-1
+- Many fixes
+
 * Fri Aug 10 2018 Alexei Panov <me AT elemc DOT name> 0.2.3-1
 - Changed include files directory name
 
