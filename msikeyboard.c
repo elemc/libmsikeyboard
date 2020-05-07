@@ -1,6 +1,7 @@
 #include <hidapi/hidapi.h>
 #include <stdlib.h>
 #include <string.h>
+#include <hidapi.h>
 
 #include "msikeyboard.h"
 
@@ -33,7 +34,7 @@ unsigned char *init_data() {
     return data;
 }
 
-int set_color(unsigned char region, unsigned char color, unsigned char intensity) {
+/*int set_color(unsigned char region, unsigned char color, unsigned char intensity) {
     hid_device *device = open_device();
     if ( device == NULL ) {
         return -1;
@@ -53,20 +54,22 @@ int set_color(unsigned char region, unsigned char color, unsigned char intensity
     free(data);
 
     return 0;
-}
+}*/
 
 int set_color_by_names(const char *region, const char *color, const char *intensity) {
     unsigned char num_region = get_region(region);
     if ( num_region < 0 ) {
         return -1;
     }
-    unsigned char num_color = get_color(color);
-    unsigned char num_instensity = get_intensity(intensity);
 
-    return set_color(num_region, num_color, num_instensity);
+    return set_rgb_color(num_region, get_rgb_by_color_name(color), get_intensity_level(intensity));
 }
 
-int set_rgb_color(unsigned char region, unsigned char r, unsigned char g, unsigned char b) {
+int set_rgb_color(
+        unsigned char region,
+        struct RGB rgb,
+        float intensity_level
+        ) {
     hid_device *device = open_device();
     if ( device == NULL ) {
         return -1;
@@ -75,9 +78,10 @@ int set_rgb_color(unsigned char region, unsigned char r, unsigned char g, unsign
     unsigned char *data = init_data();
     data[2] = 64;
     data[3] = region;
-    data[4] = r;
-    data[5] = g;
-    data[6] = b;
+    data[4] = (char)((float)rgb.r * intensity_level);
+    data[5] = (char)((float)rgb.g * intensity_level);
+    data[6] = (char)((float)rgb.b * intensity_level);
+    data[7] = 0;
 
     int result = hid_send_feature_report(device, data, DATA_BUFFER_SIZE);
     close_device(device);
@@ -89,12 +93,12 @@ int set_rgb_color(unsigned char region, unsigned char r, unsigned char g, unsign
     return 0;
 }
 
-int set_rgb_color_by_name(const char *region, unsigned char r, unsigned char g, unsigned char b) {
+int set_rgb_color_by_name(const char *region, struct RGB rgb, const char *intensity) {
     unsigned char num_region = get_region(region);
     if ( num_region < 0 ) {
         return -1;
     }
-    return set_rgb_color(num_region, r,  g, b);
+    return set_rgb_color(num_region, rgb, get_intensity_level(intensity));
 }
 
 int set_mode(unsigned char mode) {
@@ -176,7 +180,7 @@ unsigned char get_color(const char *color_name) {
     return result;
 }
 
-unsigned char get_intensity(const char *name) {
+/*unsigned char get_intensity(const char *name) {
     if (name == NULL) {
         return -1;
     }
@@ -186,7 +190,7 @@ unsigned char get_intensity(const char *name) {
     unsigned char result = get_code_from_list(name, intensities, size);
     result = result < 0 ? 1 : result;
     return result;
-}
+}*/
 
 char **get_intensities(size_t *size) {
     *size = 4;
@@ -198,6 +202,33 @@ char **get_intensities(size_t *size) {
     result[3] = "light";
 
     return result;
+}
+
+float get_intensity_level(const char *intensity) {
+    size_t size;
+    char **intensities = get_intensities(&size);
+    unsigned char result = get_code_from_list(intensity, intensities, size);
+
+    float level;
+
+    switch (result) {
+        case 0:
+            level = (float)1.0;
+            break;
+        case 1:
+            level = (float)0.75;
+            break;
+        case 2:
+            level = (float)0.50;
+            break;
+        case 3:
+            level = (float)0.25;
+            break;
+        default:
+            level = (float)1.0;
+            break;
+    }
+    return level;
 }
 
 char **get_colors(size_t *size) {
@@ -243,4 +274,53 @@ char **get_regions(size_t *size) {
     result[6] = "touchpad";
     return result;
 
+}
+
+struct RGB get_rgb_by_color_name(const char *name) {
+    size_t size;
+    char **colors = get_colors(&size);
+    unsigned char result = get_code_from_list(name, colors, size);
+
+    struct RGB rgb;
+    rgb.r = 0;
+    rgb.g = 0;
+    rgb.b = 0;
+
+    switch (result) {
+        case 0:
+            break;
+        case 1:
+            rgb.r = 255;
+            break;
+        case 2:
+            rgb.r = 255;
+            rgb.g = 165;
+            break;
+        case 3:
+            rgb.r = 255;
+            rgb.g = 255;
+            break;
+        case 4:
+            rgb.g = 128;
+            break;
+        case 5:
+            rgb.g = 255;
+            rgb.b = 255;
+            break;
+        case 6:
+            rgb.b = 255;
+            break;
+        case 7:
+            rgb.r = 128;
+            rgb.b = 128;
+            break;
+        case 8:
+            rgb.r = 255;
+            rgb.g = 255;
+            rgb.b = 255;
+            break;
+        default:
+            break;
+    }
+    return rgb;
 }
