@@ -1,5 +1,5 @@
 Name:           libmsikeyboard
-Version:        0.2.1
+Version:        0.3.2
 Release:        1%{?dist}
 Summary:        Library for change LED color, intensity and mode on MSI keyboards
 
@@ -54,9 +54,21 @@ LD_LIBRARY_PATH=. ctest -V %{?_smp_mflags}
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/msikeyboard.pc
-
+%{_datadir}/cmake/Modules/Findlibmsikeyboard.cmake
 
 %changelog
+* Mon May 11 2020 Alexei Panov <me AT elemc DOT name> 0.3.2-1
+- added cmake find module
+
+* Tue May 07 2020 Alexei Panov <me AT elemc DOT name> 0.3.1-1
+- Many fixes
+
+* Fri Aug 10 2018 Alexei Panov <me AT elemc DOT name> 0.2.3-1
+- Changed include files directory name
+
+* Wed Aug 16 2017 Alexei Panov <me AT elemc DOT name> 0.2.2-1
+- New release
+
 * Tue Dec 27 2016 Alexei Panov <me AT elemc DOT name> 0.2.1-1
 - Fix missing size_t bug
 
