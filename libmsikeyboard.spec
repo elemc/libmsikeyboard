@@ -1,5 +1,5 @@
 Name:           libmsikeyboard
-Version:        0.3.2
+Version:        0.3.3
 Release:        1%{?dist}
 Summary:        Library for change LED color, intensity and mode on MSI keyboards
 
@@ -56,6 +56,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue May 12 2020 Alexei Panov <me AT elemc DOT name> 0.3.3-1
+- changed cmake find module
+
 * Mon May 11 2020 Alexei Panov <me AT elemc DOT name> 0.3.2-1
 - added cmake find module
 
