@@ -43,8 +43,9 @@ pkg_check_modules(PC_libmsikeyboard QUIET libmsikeyboard)
 
 find_path(libmsikeyboard_INCLUDE_DIR
         NAMES msikeyboard.h
+        PATHS ${PC_libmsikeyboard_INCLUDE_DIRS}
         PATH_SUFFIX msikeyboard
-        PATHS ${CMAKE_SYSTEM_INCLUDE_PATH}
+        PATH_SUFFIXES msikeyboard
 )
 find_library(libmsikeyboard_LIBRARY
         NAMES libmsikeyboard.so libmsikeyboard.dylib
