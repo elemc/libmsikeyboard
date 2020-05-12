@@ -32,7 +32,7 @@ Cache Variables
 The following cache variables may also be set:
 
 ``libmsikeyboard_INCLUDE_DIR``
-  The directory containing ``libmsikeyboard.h``.
+  The directory containing ``msikeyboard.h``.
 ``libmsikeyboard_LIBRARY``
   The path to the libmsikeyboard library.
 
@@ -43,8 +43,8 @@ pkg_check_modules(PC_libmsikeyboard QUIET libmsikeyboard)
 
 find_path(libmsikeyboard_INCLUDE_DIR
         NAMES msikeyboard.h
-        PATHS ${PC_libmsikeyboard_INCLUDE_DIRS}
-        PATH_SUFFIXES msikeyboard
+        PATH_SUFFIX msikeyboard
+        PATHS ${CMAKE_SYSTEM_INCLUDE_PATH}
 )
 find_library(libmsikeyboard_LIBRARY
         NAMES libmsikeyboard.so libmsikeyboard.dylib
