@@ -47,7 +47,7 @@ find_path(libmsikeyboard_INCLUDE_DIR
         PATH_SUFFIXES msikeyboard
 )
 find_library(libmsikeyboard_LIBRARY
-        NAMES libmsikeyboard.so
+        NAMES libmsikeyboard.so libmsikeyboard.dylib
         PATHS ${PC_libmsikeyboard_LIBRARY_DIRS}
 )
 set(libmsikeyboard_VERSION ${PC_libmsikeyboard_VERSION})
