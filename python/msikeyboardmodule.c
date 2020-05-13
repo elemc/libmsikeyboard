@@ -1,7 +1,7 @@
 #define PY_SSIZE_T_CLEAN
 #include <Python.h>
 
-#include <msikeyboard/msikeyboard.h>
+#include <msikeyboard.h>
 
 #if PY_MAJOR_VERSION >= 3
 #define OUTPUT_FORMAT "y#"

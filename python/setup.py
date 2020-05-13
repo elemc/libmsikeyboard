@@ -16,7 +16,7 @@ setup(
             ['msikeyboardmodule.c'],
             include_dirs=['..'],
             libraries=['msikeyboard', 'boost_program_options'],
-            library_dirs=['../build/']
+            library_dirs=['/usr/local/lib', '/usr/lib', '/usr/local/lib64', '/usr/lib64']
         ),
     ],
     author="Alexei Panov",

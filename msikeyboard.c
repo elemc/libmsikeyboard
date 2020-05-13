@@ -33,28 +33,6 @@ unsigned char *init_data() {
     return data;
 }
 
-/*int set_color(unsigned char region, unsigned char color, unsigned char intensity) {
-    hid_device *device = open_device();
-    if ( device == NULL ) {
-        return -1;
-    }
-
-    unsigned char *data = init_data();
-    data[2] = 66;
-    data[3] = region;
-    data[4] = color;
-    data[5] = intensity;
-
-    int result = hid_send_feature_report(device, data, DATA_BUFFER_SIZE);
-    close_device(device);
-    if ( result < 0 ) {
-        return result;
-    }
-    free(data);
-
-    return 0;
-}*/
-
 int set_color_by_names(const char *region, const char *color, const char *intensity) {
     unsigned char num_region = get_region(region);
     if ( num_region < 0 ) {
@@ -178,18 +156,6 @@ unsigned char get_color(const char *color_name) {
     result = result < 0 ? 1 : result;
     return result;
 }
-
-/*unsigned char get_intensity(const char *name) {
-    if (name == NULL) {
-        return -1;
-    }
-
-    size_t size;
-    char **intensities = get_intensities(&size);
-    unsigned char result = get_code_from_list(name, intensities, size);
-    result = result < 0 ? 1 : result;
-    return result;
-}*/
 
 char **get_intensities(size_t *size) {
     *size = 4;

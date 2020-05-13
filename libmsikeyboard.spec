@@ -1,3 +1,4 @@
+%global         srcname msikeyboard
 Name:           libmsikeyboard
 Version:        0.3.3
 Release:        1%{?dist}
@@ -9,7 +10,9 @@ Source0:        http://repo.elemc.name/sources/%{name}-%{version}.tar.xz
 
 BuildRequires:  hidapi-devel
 BuildRequires:  meson
-BuildRequires:  gcc
+BuildRequires:  gcc gcc-c++
+BuildRequires:  python3-devel
+BuildRequires:  boost-devel
 
 %description
 Library for change LED color, intensity and modes on MSI keyboards
@@ -22,6 +25,13 @@ Requires:       %{name}%{?_isa} = %{version}-%{release}
 The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
+%package -n     python3-%{srcname}
+Summary:        Python files for %{name}
+Requires:       %{name}%{?_isa} = %{version}-%{release}
+
+%description -n python3-%{srcname}
+The python3-%{srcname} package contains python library files for
+developing applications that use %{name}
 
 %prep
 %autosetup
@@ -29,10 +39,17 @@ developing applications that use %{name}.
 %build
 %meson
 %meson_build
+pushd python
+%py3_build
+popd
+
 
 %install
 rm -rf $RPM_BUILD_ROOT
 %meson_install
+pushd python
+%py3_install
+popd
 
 
 %post -p /sbin/ldconfig
@@ -54,6 +71,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/msikeyboard.pc
 %{_datadir}/cmake/Modules/Findlibmsikeyboard.cmake
 
+%files -n python3-%{srcname}
+%{python3_sitearch}/%{srcname}-*.egg-info/
+%{python3_sitearch}/%{srcname}*
+%{python3_sitearch}/MSIKeyboard
+%{python3_sitearch}/Region
 
 %changelog
 * Tue May 12 2020 Alexei Panov <me AT elemc DOT name> 0.3.3-1
@@ -61,9 +83,6 @@ rm -rf $RPM_BUILD_ROOT
 
 * Mon May 11 2020 Alexei Panov <me AT elemc DOT name> 0.3.2-1
 - added cmake find module
-
-* Tue May 07 2020 Alexei Panov <me AT elemc DOT name> 0.3.1-1
-- Many fixes
 
 * Fri Aug 10 2018 Alexei Panov <me AT elemc DOT name> 0.2.3-1
 - Changed include files directory name
