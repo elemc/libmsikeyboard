@@ -52,20 +52,24 @@ set (FIND_MODULE_FOR_CMAKE
 
 project (${PROJECT_NAME})
 
-set (HIDAPI_hidraw_DIR ${CMAKE_SOURCE_DIR}/cmake-modules)
-set (HIDAPI_libusb_DIR ${CMAKE_SOURCE_DIR}/cmake-modules)
+#set (HIDAPI_hidraw_DIR ${CMAKE_SOURCE_DIR}/cmake-modules)
+#set (HIDAPI_libusb_DIR ${CMAKE_SOURCE_DIR}/cmake-modules)
+#set (HIDAPI_DIR ${CMAKE_SOURCE_DIR}/cmake-modules)
+set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake-modules)
 
 
 set (DEP_LIB_INCLUDES           "")
 set (BUILD_PROJECT_LIBRARIES    "")
 
-IF ( WITH_HIDRAW )
-    find_package (HIDAPI_hidraw REQUIRED)
-ELSE ( WITH_HIDRAW )
-    find_package (HIDAPI_libusb REQUIRED)
-ENDIF ( WITH_HIDRAW )
-set (BUILD_PROJECT_LIBRARIES ${BUILD_PROJECT_LIBRARIES} ${HIDAPI_LIBRARIES})
+#IF ( WITH_HIDRAW )
+#    find_package (HIDAPI_hidraw REQUIRED)
+#ELSE ( WITH_HIDRAW )
+#    find_package (HIDAPI_libusb REQUIRED)
+#ENDIF ( WITH_HIDRAW )
+find_package(HIDAPI REQUIRED)
+set (BUILD_PROJECT_LIBRARIES ${BUILD_PROJECT_LIBRARIES} ${} ${HIDAPI_LIBRARIES})
 set (DEP_LIB_INCLUDES ${DEP_LIB_INCLUDES} ${HIDAPI_INCLUDE_DIR})
+message("HIDAPI: ${HIDAPI_INCLUDE_DIR}")
 
 include(FindPkgConfig QUIET)
 if(PKG_CONFIG_FOUND)

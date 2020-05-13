@@ -1,7 +1,6 @@
-#include <hidapi/hidapi.h>
+#include <hidapi.h>
 #include <stdlib.h>
 #include <string.h>
-#include <hidapi.h>
 
 #include "msikeyboard.h"
 
