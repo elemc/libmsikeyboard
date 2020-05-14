@@ -34,7 +34,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %license LICENSE
-%doc README.md
 %{python3_sitearch}/%{srcname}-*.egg-info/
 %{python3_sitearch}/%{srcname}*
 %{python3_sitearch}/MSIKeyboard
