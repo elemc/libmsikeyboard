@@ -1,4 +1,3 @@
-%global         srcname msikeyboard
 Name:           libmsikeyboard
 Version:        0.3.3
 Release:        1%{?dist}
@@ -25,32 +24,16 @@ Requires:       %{name}%{?_isa} = %{version}-%{release}
 The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
-%package -n     python3-%{srcname}
-Summary:        Python files for %{name}
-Requires:       %{name}%{?_isa} = %{version}-%{release}
-
-%description -n python3-%{srcname}
-The python3-%{srcname} package contains python library files for
-developing applications that use %{name}
-
 %prep
 %autosetup
 
 %build
 %meson
 %meson_build
-pushd python
-%py3_build
-popd
-
 
 %install
 rm -rf $RPM_BUILD_ROOT
 %meson_install
-pushd python
-%py3_install
-popd
-
 
 %post -p /sbin/ldconfig
 
@@ -65,16 +48,12 @@ popd
 %{_libdir}/*.so.*
 
 %files devel
+%license LICENSE
 %doc README.md
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/msikeyboard.pc
 %{_datadir}/cmake/Modules/Findlibmsikeyboard.cmake
-
-%files -n python3-%{srcname}
-%{python3_sitearch}/%{srcname}-*.egg-info/
-%{python3_sitearch}/%{srcname}*
-%{python3_sitearch}/MSIKeyboard
 
 %changelog
 * Tue May 12 2020 Alexei Panov <me AT elemc DOT name> 0.3.3-1

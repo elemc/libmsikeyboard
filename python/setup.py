@@ -14,9 +14,9 @@ setup(
         Extension(
             'msikeyboard',
             ['msikeyboardmodule.c'],
-            include_dirs=['..'],
+            include_dirs=['..', '/usr/include/msikeyboard', '/usr/local/include/msikeyboard'],
             libraries=['msikeyboard', 'boost_program_options'],
-            library_dirs=['..', '/usr/local/lib', '/usr/lib', '/usr/local/lib64', '/usr/lib64']
+            library_dirs=['/usr/local/lib', '/usr/lib', '/usr/local/lib64', '/usr/lib64']
         ),
     ],
     author="Alexei Panov",
