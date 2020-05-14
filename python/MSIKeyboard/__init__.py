@@ -1,5 +1,5 @@
 import msikeyboard
-from Region import Region
+from MSIKeyboard.region import Region
 from MSIKeyboard.exception import MSIKeyboardException
 
 

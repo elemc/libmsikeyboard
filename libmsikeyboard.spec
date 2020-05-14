@@ -75,7 +75,6 @@ popd
 %{python3_sitearch}/%{srcname}-*.egg-info/
 %{python3_sitearch}/%{srcname}*
 %{python3_sitearch}/MSIKeyboard
-%{python3_sitearch}/Region
 
 %changelog
 * Tue May 12 2020 Alexei Panov <me AT elemc DOT name> 0.3.3-1
