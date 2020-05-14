@@ -1,8 +1,9 @@
 libmsikeyboard
 ==============
 
+RPM Build progress: 
 * libmsikeyboard [![Copr build status](https://copr.fedorainfracloud.org/coprs/elemc/msikeyboard/package/libmsikeyboard/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/elemc/msikeyboard/package/libmsikeyboard/)
-* python3-msikeyboard
+* python3-msikeyboard [![Copr build status](https://copr.fedorainfracloud.org/coprs/elemc/msikeyboard/package/python3-msikeyboard/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/elemc/msikeyboard/package/python3-msikeyboard/)
 
 
 This library for change colors, intensity and modes in MSI keyboards
