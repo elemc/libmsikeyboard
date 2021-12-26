@@ -1,12 +1,12 @@
 %global         srcname msikeyboard
 Name:           python3-%{srcname}
 Version:        0.3.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Python library for change LED color, intensity and mode on MSI keyboards
 
 License:        GPLv3
-URL:            http://elemc.name
-Source0:        http://repo.elemc.name/sources/%{name}-%{version}.tar.xz
+URL:            https://elemc.name
+Source0:        https://elemc.name/sources/%{name}-%{version}.tar.xz
 
 BuildRequires:  hidapi-devel
 BuildRequires:  gcc gcc-c++
@@ -39,6 +39,9 @@ rm -rf $RPM_BUILD_ROOT
 %{python3_sitearch}/MSIKeyboard
 
 %changelog
+* Sun Dec 26 2021 Alexei Panov <me AT elemc DOT name> 0.3.3-2
+- changed URLs 
+
 * Tue May 12 2020 Alexei Panov <me AT elemc DOT name> 0.3.3-1
 - initial package build
 

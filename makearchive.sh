@@ -1,7 +1,7 @@
 #!/bin/sh
 
 PROJECT_NAME=libmsikeyboard
-VERSION=0.3.3
+VERSION=0.3.4
 PKGNAME=${PROJECT_NAME}-${VERSION}
 PYTHON_PKGNAME="python3-msikeyboard-${VERSION}"
 
