@@ -1,11 +1,11 @@
 Name:           libmsikeyboard
-Version:        0.3.3
+Version:        0.3.4
 Release:        1%{?dist}
 Summary:        Library for change LED color, intensity and mode on MSI keyboards
 
 License:        GPLv3
-URL:            http://elemc.name
-Source0:        http://repo.elemc.name/sources/%{name}-%{version}.tar.xz
+URL:            https://elemc.name
+Source0:        https://elemc.name/sources/%{name}-%{version}.tar.xz
 
 BuildRequires:  hidapi-devel
 BuildRequires:  meson
@@ -56,6 +56,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/cmake/Modules/Findlibmsikeyboard.cmake
 
 %changelog
+* Sun Dec 26 2021 Alexei Panov <me AT elemc DOT name> 0.3.4-1
+-  changed URLs to https
+
 * Tue May 12 2020 Alexei Panov <me AT elemc DOT name> 0.3.3-1
 - changed cmake find module
 
