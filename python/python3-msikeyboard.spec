@@ -11,6 +11,7 @@ Source0:        https://elemc.name/sources/%{name}-%{version}.tar.xz
 BuildRequires:  hidapi-devel
 BuildRequires:  gcc gcc-c++
 BuildRequires:  python3-devel
+BuildRequires:  python3-setuptools
 BuildRequires:  boost-devel
 BuildRequires:  libmsikeyboard-devel
 
